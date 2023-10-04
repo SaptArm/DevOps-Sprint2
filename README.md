@@ -95,13 +95,14 @@ Build -> Pipeline Editor
 ```
 variables:
   TAG: "v1.1"
-
 stages:
   - build
-  - deploy
 
 docker_build:
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   rules:
     - if: $TAG =~ /^v\d+.\d+/
       exists:
@@ -109,15 +110,13 @@ docker_build:
     - when: on_success
     - when: manual
 
-  before_script:
-     - sudo docker login -u "$REG_USER" -p "$REG_PASSWORD"
-
   script:
     - export
     - tag='$TAG'
-    - echo "Running build with tag $TAG "
-    - sudo docker build -t mazespd/sprint2:$TAG .
-    - sudo docker push mazespd/sprint2:$TAG
+    - docker build -t saptarm/sprint2:$TAG .
+    - docker login -u "$REG_USER" -p "$REG_PASSWORD"
+    - docker push saptarm/sprint2:$TAG
+
 ```
 Если job выполнился успешно, тогда вывод будет следующий:
 ![job1](https://github.com/mazespd/DevOps-Sprint-2/assets/131882625/61099edf-1c00-4e64-884f-ecb25c8e3ddd)
@@ -126,7 +125,7 @@ docker_build:
 
 3) В каталоге kubernetes описываем все нужные манифесты:
 ```
-https://github.com/mazespd/DevOps-Sprint-2/tree/main/kubernetes
+https://github.com/SaptArm/DevOps-Sprint2/tree/main/kubernetes
 ```
 
 Чтобы развернуть приложение на нашем ранее созданном кластере, используется следующая команда:
@@ -139,7 +138,7 @@ kubectl apply -f . -n diplom
 
  Соответственно приложение доступно по двум адресам на порту 30773
 ```
-http://51.250.104.179:30773
+http://158.:30773
 http://130.193.54.175:30773
 ```
 ![kub1](https://github.com/mazespd/DevOps-Sprint-2/assets/131882625/0adbc30b-0981-47f1-bb24-0fff5e41f5b9)
@@ -162,28 +161,28 @@ helm upgrade --install -n diplom --values templates/credentials.yaml --set servi
 ---
 variables:
   TAG: "v1.1"
-  CI_NAMESPACE: "diplom"
-
 stages:
   - build
   - deploy
-
 docker_build:
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   rules:
     - if: $TAG =~ /^v\d+.\d+/
       exists:
         - Dockerfile
     - when: on_success
     - when: manual
-  before_script:
-     - sudo docker login -u "$REG_USER" -p "$REG_PASSWORD"
+
   script:
     - export
     - tag='$TAG'
-    - echo "Running build with tag $TAG "
-    - sudo docker build -t mazespd/sprint2:$TAG .
-    - sudo docker push mazespd/sprint2:$TAG
+    - docker build -t saptarm/sprint2:$TAG .
+    - docker login -u "$REG_USER" -p "$REG_PASSWORD"
+    - docker push saptarm/sprint2:$TAG
+
 
 app_deploy: 
   stage: deploy

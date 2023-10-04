@@ -121,7 +121,7 @@ docker_build:
 Если job выполнился успешно, тогда вывод будет следующий:
 ![job1](https://github.com/mazespd/DevOps-Sprint-2/assets/131882625/61099edf-1c00-4e64-884f-ecb25c8e3ddd)
 Результат можно посмотреть в Docker Hub:
-![dh1](https://github.com/mazespd/DevOps-Sprint-2/assets/131882625/9190755b-1620-4e59-b4a2-c2ca9ce6aba3)
+![Screenshot from 2023-10-04 10-24-28](https://github.com/SaptArm/DevOps-Sprint2/assets/129938847/300928e2-dfb5-4594-8b53-a794d3382ac1)
 
 3) В каталоге kubernetes описываем все нужные манифесты:
 ```

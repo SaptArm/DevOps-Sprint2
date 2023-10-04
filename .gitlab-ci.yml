@@ -26,8 +26,8 @@ docker_build:
     - export
     - tag='$TAG'
     - echo "Running build with tag $TAG "
-    - sudo docker build -t mazespd/sprint2:$TAG .
-    - sudo docker push mazespd/sprint2:$TAG
+    - sudo docker build -t saptarm/sprint2:$TAG .
+    - sudo docker push saptarm/sprint2:$TAG
 
 app_deploy: 
   stage: deploy

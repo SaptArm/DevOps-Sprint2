@@ -119,7 +119,8 @@ docker_build:
 
 ```
 Если job выполнился успешно, тогда вывод будет следующий:
-![job1](https://github.com/mazespd/DevOps-Sprint-2/assets/131882625/61099edf-1c00-4e64-884f-ecb25c8e3ddd)
+![Screenshot from 2023-10-04 10-36-39](https://github.com/SaptArm/DevOps-Sprint2/assets/129938847/86c1b144-7765-4151-8ddb-f80a7764a055)
+
 Результат можно посмотреть в Docker Hub:
 ![Screenshot from 2023-10-04 10-24-28](https://github.com/SaptArm/DevOps-Sprint2/assets/129938847/300928e2-dfb5-4594-8b53-a794d3382ac1)
 
